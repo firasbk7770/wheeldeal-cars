@@ -32,6 +32,7 @@ import Bugati from './icons/Bugati';
 import All from './icons/All';
 // import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'; // Import new icons
 import { context } from '../../../context/context';
+import { div } from 'framer-motion/client';
 
 
 export const RangeSlider = ({ min, max, value, step, onChange }) => {
@@ -92,8 +93,11 @@ export const RangeSlider = ({ min, max, value, step, onChange }) => {
     const maxPos = ((maxValue - min) / (max - min)) * 100;
 
     return (
-        <div className="slider-container relative w-full h-[170px]">
-            <div className="mt-[14.35px] text-[14px] font-[500] text-black">Price range</div>
+        <div className="slider-container relative  h-[170px]  text-white  bg-[#2C2C2C]">
+            <div className="mt-[14.35px] text-[14px] font-[500] text-white flex items-center justify-between">Price range
+                <div className="">
+                    <img src={require("../../../images/Frame (8).png")} alt="" />
+            </div></div>
 
             {/* Slider track with min/max labels */}
             <div className="relative flex items-center">
@@ -188,26 +192,30 @@ export const CustomDropdown = ({ options, defaultText, selectedValues, onSelect,
                         animate={{ opacity: 1, y: 0 }} // Animate to visible and positioned correctly
                         exit={{ opacity: 0, y: -10 }} // Animate exit
                         transition={{ duration: 0.3 }} // Control the speed of the animation
-                        className={`flex absolute justify-start items-center bg-white text-black flex-wrap top-[90px] rounded-2xl p-3 font-[500] gap-[5px]`}
-                        style={{ width: width, left: left }}
+                        className={`flex absolute justify-start items-center bg-white text-black flex-wrap top-[90px] rounded-2xl p-3 font-[500] gap-[5px] ${name === "Price"? 'bg-[#2C2C2C]': ''}`}
+                        style={{ width: width, left: left, backgroundColor: name === "Price"? "#2C2C2C": "white" }}
                     >
                         {name === "Make"
-                            ? options.map((option) => (
+
+                            ? <div className='grid grid-cols-2 py-2 z-20' style={{ zIndex: 9999999 }}> {options.map((option) => (
+
                                 <li
                                     key={option.value}
-                                    className="rounded-full"
+                                    className={`${styles.option} ${selectedValues.includes(option.value) ? styles.selected : ''}`}
                                     onClick={() => toggleOption(option.value, option.label)}
                                     onMouseEnter={() => setHoveredValue(option.value)}
                                     onMouseLeave={() => setHoveredValue(null)}
                                 >
-                                    {React.cloneElement(option.label, {
-                                        bg: selectedValues.includes(option.value) ? "black" : (hoveredValue === option.value ? "#F0F0F0" : "white"),
-                                        color: selectedValues.includes(option.value) ? "white" : (hoveredValue === option.value ? "#B9B9B9" : "#B9B9B9")
-                                    })}
+                                    {option.value}
+                                    <div className="">
+                                        <img src={require("../../../images/Vector (1).png")} alt="" />
+                                    </div>
                                 </li>
-                            ))
+
+                            ))}
+                            </div>
                             : name === "Price" ? (
-                                <li className=" w-[401px]">
+                                <li className="bg-[#2C2C2C] w-[401px]">
                                     <RangeSlider
                                         min={0}
                                         max={5000}
@@ -217,15 +225,24 @@ export const CustomDropdown = ({ options, defaultText, selectedValues, onSelect,
                                     />
                                 </li>
                             ) : (
-                                options.map((option) => (
-                                    <li
-                                        key={option.value}
-                                        className={`${styles.option} ${selectedValues.includes(option.value) ? styles.selected : ''}`}
-                                        onClick={() => toggleOption(option.value, option.label)}
-                                    >
-                                        {option.label}
-                                    </li>
-                                ))
+                                <div>
+                                    {options.map((option) => (
+
+                                        <li
+                                            key={option.value}
+                                            className={`${styles.option} ${selectedValues.includes(option.value) ? styles.selected : ''}`}
+                                            onClick={() => toggleOption(option.value, option.label)}
+                                            onMouseEnter={() => setHoveredValue(option.value)}
+                                            onMouseLeave={() => setHoveredValue(null)}
+                                        >
+                                            {option.value}
+                                            <div className="">
+                                                <img src={require("../../../images/Vector (1).png")} alt="" />
+                                            </div>
+                                        </li>
+
+                                    ))}
+                                </div>
                             )}
                     </motion.ul>
                 )}
@@ -235,42 +252,53 @@ export const CustomDropdown = ({ options, defaultText, selectedValues, onSelect,
 };
 
 export const selections = [
-    {
-        name: "Categories",
-        options: [
-            { value: 'Sport', label: 'Sport' },
-            { value: 'SUVs', label: 'SUVs' },
-            { value: 'Hatchback', label: 'Hatchback' },
-            { value: 'Crossover', label: 'Crossover' },
-            { value: 'Sedan', label: 'Sedan' },
-            { value: 'Electric', label: 'Electric' },
-            { value: 'Hybrid', label: 'Hybrid' },
-            { value: 'Pickup', label: 'Pickup' },
-        ],
-        default: "All categories",
-        width: '500px',
-        left: "0px"
-    },
+    // {
+    //     name: "Categories",
+    //     options: [
+    //         { value: 'Sport', label: 'Sport' },
+    //         { value: 'SUVs', label: 'SUVs' },
+    //         { value: 'Hatchback', label: 'Hatchback' },
+    //         { value: 'Crossover', label: 'Crossover' },
+    //         { value: 'Sedan', label: 'Sedan' },
+    //         { value: 'Electric', label: 'Electric' },
+    //         { value: 'Hybrid', label: 'Hybrid' },
+    //         { value: 'Pickup', label: 'Pickup' },
+    //     ],
+    //     default: "All categories",
+    //     width: '500px',
+    //     left: "0px"
+    // },
     {
         name: "Make",
         options: [
-            { value: 'All', label: <All /> },
-            // { value: 'toyota', label: <Jeep /> },
-            // { value: 'honda', label: <Merce /> },
-            { value: 'Volkswagen', label: <CircleIcon /> },
-            { value: 'Acura', label: <AIcon /> },
-            { value: 'BMW', label: <Benz /> },
-            { value: 'Tesla', label: <Tesla /> },
-            { value: 'Mazda', label: <Oval /> },
-            { value: 'Toyota', label: <OvalO /> },
-            // { value: '7', label: <Hunda /> },
-            // { value: '8', label: <VerticalBox /> },
-            // { value: '9', label: <Animal /> },
-            { value: 'Kia', label: <KN /> },
-            { value: 'Porshe', label: <Bugati /> },
+            { id: 1, value: 'Ford' },
+            { id: 2, value: 'Chevrolet' },
+            { id: 3, value: 'Toyota' },
+            { id: 4, value: 'Honda' },
+            { id: 5, value: 'Jeep' },
+            { id: 6, value: 'Tesla' },
+            { id: 7, value: 'Ram' },
+            { id: 8, value: 'Nissan' },
+            { id: 9, value: 'BMW' },
+            { id: 10, value: 'Mercedes-Benz' },
+            { id: 11, value: 'Subaru' },
+            { id: 12, value: 'GMC' },
+            { id: 13, value: 'Dodge' },
+            { id: 14, value: 'Volkswagen' },
+            { id: 15, value: 'Hyundai' },
+            { id: 16, value: 'Ferrari' },
+            { id: 17, value: 'Lamborghini' },
+            { id: 18, value: 'Porsche' },
+            { id: 19, value: 'Aston Martin' },
+            { id: 20, value: 'McLaren' },
+            { id: 21, value: 'Rolls-Royce' },
+            { id: 22, value: 'Bentley' },
+            { id: 23, value: 'Maserati' },
+            { id: 24, value: 'Bugatti' },
+            { id: 25, value: 'Lotus' },
         ],
         default: "All makes",
-        width: '962px',
+        width: '362px',
         left: "34px"
     },
     {
@@ -297,8 +325,8 @@ export const selections = [
             // { value: 'ProCeed', label: 'ProCeed' },
         ],
         default: "All models",
-        width: '818px',
-        left: "106px"
+        width: '190px',
+        left: "176px"
     },
     {
         name: "BodyType",
@@ -315,8 +343,8 @@ export const selections = [
             { value: 'Wagon', label: 'Wagon' },
         ],
         default: "All types",
-        width: '980px',
-        left: "24px"
+        width: '190px',
+        left: "404px"
     },
     {
         name: "Price",
@@ -349,7 +377,7 @@ const HeroSection = () => {
     //     Price: []
     // });
 
-    const {selectedValues, setSelectedValues, priceRange, setPriceRange, isFilter, setIsFilter} = useContext(context) 
+    const { selectedValues, setSelectedValues, priceRange, setPriceRange, isFilter, setIsFilter } = useContext(context)
 
     // const [priceRange, setPriceRange] = useState({ min: 0, max: 100 });
 
@@ -385,9 +413,9 @@ const HeroSection = () => {
                     <img src={require("../../../images/insta2.png")} alt="" className='w-[18px] h-[18px]  ' />
                     <img src={require("../../../images/solidfb.png")} alt="" className='w-[18px] h-[18px]  ' />
                 </div>
-                <img src={require("../../../images/hero.png")} style={{borderRadius: '22px'}} className='w-full h-[632px] lg:block md:block hidden' alt="" />
+                <img src={require("../../../images/hero.png")} style={{ borderRadius: '22px' }} className='w-full h-[632px] lg:block md:block hidden' alt="" />
 
-                <img src={require("../../../images/responsiveHeroImage.png")} className='w-full h-[652px] lg:hidden md:hidden block' alt="" style={{ filter: "brightness(0.5)", borderRadius: '22px'}} />
+                <img src={require("../../../images/responsiveHeroImage.png")} className='w-full h-[652px] lg:hidden md:hidden block' alt="" style={{ filter: "brightness(0.5)", borderRadius: '22px' }} />
                 <div className="samllText absolute  lg:w-[560px] md:w-[460px] w-[219px] lg:right-[5%] md:right-[5%] right-[32px] lg:top-[50px]md:top-[50px] top-[30px] text-[8.76px] text-white lg:text-right md:text-right text-center font-[300] leading-[1.5] lg:opacity-100 opacity-50">
                     Explore our exclusive collection of exotic cars, each meticulously chosen to represent the epitome of automotive <br /> engineering and design. From sleek sports cars to powerful luxury SUVs, our selection caters to every discerning taste.
                 </div>
@@ -400,7 +428,7 @@ const HeroSection = () => {
                         Discover the perfect vehicle for you with our seamless leasing experience.
                     </div>
 
-                    <div className=" relative w-[1030px] h-[78px] bg-white rounded-[15px] mt-10  justify-between items-center lg:flex hidden">
+                    <div className=" relative w-[1030px] h-[78px] bg-white rounded-[15px] mt-10  justify-between items-center lg:flex hidden pl-5">
                         {selections.map((sel) => (
                             <div key={sel.name} className="hoverBox w-[166px] hover:bg-lightgray transition-all duration-200 rounded">
                                 <div className="ml-[16px] text-start font-[500] text-[12px] text-[#797979] mt-[4px] ">
