@@ -365,6 +365,16 @@ select option:focus {
   background-size: cover;
 }
 
+@media only screen and (max-width: 1400px) {
+  .hoverAni56:hover div {
+    height: 2px;
+    width: 32px;
+    background-color: #F6B000;
+    position: absolute;
+    left: 62%;
+  }
+}
+
 
 
 @media only screen and (max-width: 600px) {
@@ -390,6 +400,14 @@ select option:focus {
 
   .catCard:hover .textSection {
     /* margin-left: -20px; */
+  }
+
+  .hoverAni56:hover div {
+    height: 2px;
+    width: 30px;
+    background-color: #F6B000;
+    position: absolute;
+    left: 63.2%;
   }
 }
 
