@@ -32,29 +32,33 @@
 
 .option {
     margin: 0px;
-    padding-top: 18px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 16px;
+    width: 166px;
+    margin-top: 5px;
+    padding: 10px 20px;
     font-size: 14px;
+    display: flex ;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 10px;
     cursor: pointer;
-    background-color: #F8F8F8;
+    /* background-color: #F8F8F8; */
     transition: background-color 0.3s ease;
-    border-radius: 43px;
+    border-radius: 13px;
 }
 
 .option:hover {
-    background-color: #e5e7eb  ;
+    background-color: #2C2C2C  ;
+    color: #FFB600;
 }
 
 .selected {
-    background-color: #000;
-    color: white;
+    background-color: #2C2C2C;
+    color: #FFB600;
 }
 
 .selected:hover {
-    background-color: #000;
-    color: white;
+    background-color: #2C2C2C;
+    color: #FFB600;
 }
 
 /* Animation */

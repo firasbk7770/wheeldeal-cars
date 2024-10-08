@@ -131,7 +131,7 @@ const Features = ({ heading = "Featured vehicles", slides = 3.5 }) => {
           </div>
 
           {/* Cards Section */}
-          <div className="flex lg:gap-5 gap-[6px] lg:w-full md:w-full w-auto max-w-full overflow-hidden mx-auto ">
+          <div className="flex lg:gap-5 gap-[6px] lg:w-full md:w-full w-auto max-w-full overflow-hidden mx-auto -z-20 ">
             <Swiper
               spaceBetween={20}
               slidesPerView={3}
@@ -159,6 +159,7 @@ const Features = ({ heading = "Featured vehicles", slides = 3.5 }) => {
                   spaceBetween: 20,
                 },
               }}
+              style={{zIndex: -1}}
             >
               {cards.map((card, index) => (
                 <SwiperSlide key={index}>
