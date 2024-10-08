@@ -2,6 +2,33 @@ import React, { useEffect, useState } from 'react'
 import Dropdown from './Dropdown'
 import { img } from 'framer-motion/client';
 
+const vehicleModels = {
+    "Ford": ["F-150", "Mustang", "Explorer", "Escape", "Bronco", "Expedition", "Edge", "Ranger", "Maverick", "Super Duty"],
+    "Chevrolet": ["Silverado", "Corvette", "Camaro", "Tahoe", "Suburban", "Malibu", "Blazer", "Equinox", "Traverse", "Colorado", "Trailblazer"],
+    "Toyota": ["Camry", "Corolla", "RAV4", "Tacoma", "Tundra", "Highlander", "4Runner", "Prius", "Sienna", "Land Cruiser"],
+    "Honda": ["Accord", "Civic", "CR-V", "Pilot", "Odyssey", "Passport", "HR-V", "Ridgeline", "Insight"],
+    "Jeep": ["Wrangler", "Grand Cherokee", "Cherokee", "Gladiator", "Renegade", "Compass", "Wagoneer"],
+    "Tesla": ["Model 3", "Model S", "Model X", "Model Y", "Cybertruck (Upcoming)", "Roadster (Upcoming)"],
+    "Ram": ["1500", "2500", "3500", "ProMaster", "TRX", "ProMaster City"],
+    "Nissan": ["Altima", "Sentra", "Rogue", "Murano", "Pathfinder", "Frontier", "Titan", "Maxima", "Armada", "Kicks", "Leaf"],
+    "BMW": ["3 Series", "5 Series", "7 Series", "X1", "X3", "X5", "X7", "4 Series", "M3", "M4", "M4", "Z4", "i3 (Discontinued)", "i4", "iX", "M8"],
+    "Mercedes-Benz": ["A-Class", "C-Class", "E-Class", "S-Class", "G-Class", "GLA", "GLB", "GLC", "GLE", "GLS", "AMG GT", "EQS (Electric)", "EQE (Electric)"],
+    "Subaru": ["Outback", "Forester", "Ascent", "Impreza", "WRX", "Crosstrek", "Legacy", "BRZ"],
+    "GMC": ["Sierra 1500", "Sierra 2500HD", "Yukon", "Acadia", "Terrain", "Canyon", "Hummer EV"],
+    "Dodge": ["Challenger", "Charger", "Durango", "Journey (Discontinued)", "Hornet", "Viper (Discontinued)", "Grand Caravan (Discontinued)"],
+    "Volkswagen": ["Jetta", "Passat", "Golf", "Tiguan", "Atlas", "ID.4 (Electric)", "Arteon", "Taos"],
+    "Hyundai": ["Elantra", "Sonata", "Tucson", "Santa Fe", "Palisade", "Kona", "Venue", "Ioniq 5 (Electric)", "Veloster N"],
+    "Ferrari": ["488", "F8 Tributo", "SF90 Stradale", "812 Superfast", "Roma", "Portofino", "LaFerrari", "Purosangue (SUV)"],
+    "Lamborghini": ["Aventador", "Huracán", "Urus", "Sián", "Revuelto (Upcoming)"],
+    "Porsche": ["911", "Cayenne", "Macan", "Panamera", "Taycan (Electric)", "718 Boxster", "718 Cayman"],
+    "Aston Martin": ["Vantage", "DB11", "DBX", "DBS Superleggera", "Valhalla (Upcoming)", "Valkyrie"],
+    "McLaren": ["720S", "570S", "GT", "600LT", "Artura (Hybrid)", "Senna", "Speedtail"],
+    "Rolls-Royce": ["Phantom", "Ghost", "Wraith", "Dawn", "Cullinan", "Spectre (Upcoming Electric)"],
+    "Bentley": ["Bentayga", "Continental GT", "Flying Spur", "Mulsanne (Discontinued)"],
+    "Maserati": ["Ghibli", "Quattroporte", "Levante", "MC20", "GranTurismo (Upcoming)"],
+    "Bugatti": ["Chiron", "Veyron (Discontinued)", "Divo", "Centodieci", "Bolide"],
+    "Lotus": ["Evora", "Elise", "Exige", "Emira",],
+};
 
 const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) => {
     // States for each field
@@ -12,13 +39,14 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
     const [leaseTerm, setLeaseTerm] = useState('');
     const [milesPerYear, setMilesPerYear] = useState('');
     const [monthlyPayment, setMonthlyPayment] = useState('');
+    const [price, setPrice] = useState('');
     const [numSeats, setNumSeats] = useState('');
     const [transmission, setTransmission] = useState('');
     const [numCylinders, setNumCylinders] = useState('');
     const [images, setImages] = useState([]);
     const [vehicleType, setVehicleType] = useState('');
     // const [description, setDescription] = useState('');
-
+    const [vehicleModelOptions, setVehicleModelOptions] = useState(null);
     // Fetch car details if carId is present (edit mode)
     useEffect(() => {
         if (carId) {
@@ -32,6 +60,7 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
                     setLeaseTerm(data?.data.leaseTerm);
                     setMilesPerYear(data?.data.miles);
                     setMonthlyPayment(data?.data.monthly_payment);
+                    setPrice(data?.data.price);
                     setNumSeats(data?.data.seats);
                     setTransmission(data?.data.transType);
                     setNumCylinders(data?.data.cylinder);
@@ -105,7 +134,7 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
 
     useEffect(() => {
         // setCarName(name + " ")
-        setMilesPerYear(milesPerYear + " ")
+        setMilesPerYear(milesPerYear + "")
     }, [])
 
     // Handle form submission
@@ -120,7 +149,7 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
             leaseTerm: String(leaseTerm || '').trim(),
             miles: String(milesPerYear || '').trim(),
             monthly_payment: sanitizedMonthlyPayment,
-
+            price: String(price || '').trim(),
             seats: String(numSeats || '').trim(),
             transType: String(transmission || '').trim(),
             cylinder: String(numCylinders || '').trim(),
@@ -151,6 +180,10 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
             })
             .catch(err => console.error('Error:', err));
     };
+
+    useEffect(() => {
+        setVehicleModelOptions(vehicleModels[brand]);
+    }, [brand]);
 
     useEffect(() => {
         // console.log("Images are", images);
@@ -209,8 +242,17 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
                         Vehicle details
                     </div>
                     <div className="flex flex-wrap pt-4 gap-3">
-
                         <div className="w-[284px]">
+                            <div className="text-[#767676] text-[12px] font-[500]">
+                                Vehicle Brand
+                            </div>
+
+                            <div className="">
+                                <Dropdown options={['Ford', 'Chevrolet', 'Toyota', 'Honda', 'Jeep', 'Tesla', 'Ram', 'Nissan', 'BMW', 'Mercedes-Benz', 'Subaru', 'GMC', 'Dodge', 'Volkswagen', 'Hyundai', 'Ferrari', 'Lamborghini', 'Porsche', 'Aston Martin', 'McLaren', 'Rolls-Royce', 'Bentley', 'Maserati', 'Bugatti', 'Lotus']}  optionCase={carId ? "edit" : "add"} label={brand || 'Ford'} onSelect={setBrand} />
+                            </div>
+                        </div>
+
+                        {/* <div className="w-[284px]">
                             <div className="text-[#767676] text-[12px] font-[500]">
                                 Choose Category
                             </div>
@@ -218,7 +260,7 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
                             <div className="">
                                 <Dropdown options={['Sport', 'SUVs ', 'Hatchback', 'Crossover', 'Sedan', 'Electric', 'Hybrid', 'Pickup']} optionCase={carId ? "edit" : "add"} label={category || 'Sport'} onSelect={setCategory} />
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className="w-[284px]">
                             <div className="text-[#767676] text-[12px] font-[500]">
@@ -226,7 +268,7 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
                             </div>
 
                             <div className="">
-                                <Dropdown options={['Model Y', 'Model S ', 'Cybertruck']} label={model || 'Model Y'} optionCase={carId ? "edit" : "add"} onSelect={setModel} />
+                                <Dropdown options={vehicleModelOptions} label={model || 'Model Y'} optionCase={carId ? "edit" : "add"} onSelect={setModel} />
                             </div>
                         </div>
 
@@ -236,18 +278,36 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
                             </div>
 
                             <div className="">
-                                <Dropdown options={['Sedan', 'Cargo Van', 'Convertible ', 'Hatchback', 'Mnivan', 'Passenger Van', 'SUV', 'Truck', 'Wagon']} optionCase={carId ? "edit" : "add"} label={vehicleType || 'Choose Vehicle Type'} onSelect={setVehicleType} />
+                                <Dropdown options={['Coupe', 'Sedan', 'SUV ', 'Crossover', 'Convertible', 'Van']} optionCase={carId ? "edit" : "add"} label={vehicleType || 'Choose Vehicle Type'} onSelect={setVehicleType} />
                             </div>
                         </div>
 
                         <div className="w-[284px]">
                             <div className="text-[#767676] text-[12px] font-[500]">
-                                Vehicle Brand
+                                Transmission type
                             </div>
 
                             <div className="">
-                                <Dropdown options={['Toyota', 'Kia', 'Tesla ', 'Acura', 'Porshe', 'Volkswagen', 'Opel', 'Mazda', 'BMW']} optionCase={carId ? "edit" : "add"} label={brand || 'Toyota'} onSelect={setBrand} />
+                                <Dropdown options={['Automatic', 'Manual']} type="transmission" optionCase={carId ? "edit" : "add"} label={transmission || 'Select transmission type'} onSelect={setTransmission} />
                             </div>
+                        </div>
+
+                        <div className="">
+                            <div className="text-[#767676] text-[12px] font-[500]">
+                                Miles per year
+                            </div>
+
+                            <input type='text' placeholder='10,000 miles/year' className="flex items-center justify-between  cursor-pointer bg-[#F8F8F8] w-[284px] h-[50px] rounded-xl px-5 text-[14px] font-[400] mt-4" value={milesPerYear} onChange={(e) => setMilesPerYear(e.target.value)} />
+
+
+                        </div>
+
+                        <div className="">
+                            <div className="text-[#767676] text-[12px] font-[500]">
+                                Monthly Payment
+                            </div>
+
+                            <input type='text' placeholder='$1080/month' className="flex items-center justify-between  cursor-pointer bg-[#F8F8F8] w-[284px] h-[50px] rounded-xl px-5 text-[14px] font-[400] mt-4" value={monthlyPayment} onChange={(e) => setMonthlyPayment(e.target.value)} />
                         </div>
 
                         <div className="w-[284px]">
@@ -262,21 +322,10 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
 
                         <div className="">
                             <div className="text-[#767676] text-[12px] font-[500]">
-                                Miles per year
+                                Price
                             </div>
 
-                            <input type='text' placeholder='10,000 miles/year' className="flex items-center justify-between  cursor-pointer bg-[#F8F8F8] w-[284px] h-[50px] rounded-xl px-5 text-[14px] font-[400] mt-4" value={milesPerYear} onChange={(e) => setMilesPerYear(e.target.value)} />
-
-
-                        </div>
-
-
-                        <div className="">
-                            <div className="text-[#767676] text-[12px] font-[500]">
-                                Monthly Payment
-                            </div>
-
-                            <input type='text' placeholder='1080' className="flex items-center justify-between  cursor-pointer bg-[#F8F8F8] w-[284px] h-[50px] rounded-xl px-5 text-[14px] font-[400] mt-4" value={monthlyPayment} onChange={(e) => setMonthlyPayment(e.target.value)} />
+                            <input type='text' placeholder='$25000' className="flex items-center justify-between  cursor-pointer bg-[#F8F8F8] w-[284px] h-[50px] rounded-xl px-5 text-[14px] font-[400] mt-4" value={price} onChange={(e) => setPrice(e.target.value)} />
                         </div>
 
 
@@ -288,16 +337,6 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
                             <input type='text' placeholder='5' className="flex items-center justify-between  cursor-pointer bg-[#F8F8F8] w-[284px] h-[50px] rounded-xl px-5 text-[14px] font-[400] mt-4" value={numSeats} onChange={(e) => setNumSeats(e.target.value)} />
 
 
-                        </div>
-
-                        <div className="w-[284px]">
-                            <div className="text-[#767676] text-[12px] font-[500]">
-                                Transmission type
-                            </div>
-
-                            <div className="">
-                                <Dropdown options={['Automatic', 'Manual transmission']} optionCase={carId ? "edit" : "add"} label={transmission || 'Select transmission type'} onSelect={setTransmission} />
-                            </div>
                         </div>
 
                         <div className="">

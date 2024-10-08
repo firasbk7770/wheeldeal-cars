@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const Dropdown = ({ options, label, onSelect, optionCase }) => {
+const Dropdown = ({ options, label, onSelect, optionCase, type }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
     const dropdownRef = useRef(null);
+    const divRef = useRef(null);
+    const [heightStyle, setHeightStyle] = useState('auto');
 
     const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -24,6 +26,17 @@ const Dropdown = ({ options, label, onSelect, optionCase }) => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
+    useEffect(() => {
+        if (divRef.current) {
+          const contentHeight = divRef.current.scrollHeight; // Get the height of the content
+          if (contentHeight > 400) {
+            setHeightStyle('400px'); // Set height to 400px if content exceeds 400px
+          } else {
+            setHeightStyle('auto'); // Keep auto height if content is less than 400px
+          }
+        }
+      }, [isOpen]); // Recalculate on children updates
+
     return (
         <div className="relative inline-block text-left rounded-xl" ref={dropdownRef}>
             <div className="flex items-center justify-between  cursor-pointer bg-[#F8F8F8] w-[284px] h-[50px] rounded-xl px-5 text-[14px] font-[400] mt-4" onClick={toggleDropdown}>
@@ -34,14 +47,14 @@ const Dropdown = ({ options, label, onSelect, optionCase }) => {
             </div>
 
             {isOpen && (
-                <div className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-[20px] shadow-lg overflow-hidden">
+                <div className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-[20px] shadow-lg overflow-hidden overflow-y-auto" style={{ height: heightStyle }} ref={divRef}>
                     {options.map((option, index) => (
                         <div
                             key={index}
                             className="px-4 py-2 mt-3 text-gray-700 cursor-pointer  hover:bg-gray-200"
                             onClick={() => handleOptionClick(option)}
                         >
-                            {option}
+                            {type === 'transmission' ? <>{option} Transmission</> : <>{option}</>}
                         </div>
                     ))}
                 </div>

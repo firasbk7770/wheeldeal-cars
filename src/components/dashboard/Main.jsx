@@ -116,7 +116,7 @@ const Main = () => {
                     <div className='flex gap-5 relative cursor-pointer' ref={dropdownRef1}>
 
 
-                        <div className="p-4 gap-3 text-[14px] font-[500] border rounded-[10px] border-[#E9E9E9] lg:flex hidden" onClick={() => setIsDropdownOpen1(!isDropdownOpen1)}>
+                        {/* <div className="p-4 gap-3 text-[14px] font-[500] border rounded-[10px] border-[#E9E9E9] lg:flex hidden" onClick={() => setIsDropdownOpen1(!isDropdownOpen1)}>
                             <img src={require("../../images/filter icon.png")} className='w-[20px] h-[20px]' alt="Filter icon" />
                             <div className="flex gap-10">
                                 <div className="text-[14px] font-[500]">
@@ -124,7 +124,7 @@ const Main = () => {
                                 </div>
                                 <img src={require("../../images/Frame (2).png")} className='w-[20px] h-[20px]' alt="Dropdown arrow" />
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* Dropdown Menu */}
                         <div className={`sortDropdown w-[252px] flex flex-col justify-center items-center absolute top-16 bg-white  rounded-[20px] transition-all duration-300 ${isDropdownOpen1 ? 'block' : 'hidden'}`} style={{ zIndex: 9999, boxShadow: "0.5px 0.5px 5px #959595 " }} >
@@ -168,7 +168,7 @@ const Main = () => {
                         Price/per month
                     </div>
                     <div className="w-[18%] text-[14px] font-[500] text-[#767676] flex items-center">
-                        Category
+                        Vehicle Type
                     </div>
                 </div>
                 {rows?.map((data, index) => (

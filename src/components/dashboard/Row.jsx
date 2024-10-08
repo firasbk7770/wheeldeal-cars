@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 
 const Row = ({ data, onDelete }) => {
-    const { category, name, monthly_payment, cylinder, photos, brand, id } = data;
+    const { vehicleType, name, monthly_payment, cylinder, photos, brand, id } = data;
     const [isEdit, setIsEdit] = useState(false); // State to handle modal visibility
     const [deleteModel, SetDeleteModel] = useState(false); // State to handle modal visibility
 
@@ -65,7 +65,7 @@ const Row = ({ data, onDelete }) => {
             </div>
 
             <div className="flex max-w-[18%] w-[18%] gap-3 items-center text-[14px] font-[500] text-[#000]">
-                <div>{category} Cars</div>
+                <div>{vehicleType}</div>
             </div>
 
             {/* Icons with hover effect */}
