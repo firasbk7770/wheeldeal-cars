@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Card from "../../General/Card";
 import Icon from "./icon/icon";
 import { motion } from "framer-motion";
@@ -6,11 +6,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link } from "react-router-dom";
 
-const Features = ({ heading = "Featured vehicles", slides=3.5 }) => {
+const Features = ({ heading = "Featured vehicles", slides = 3.5 }) => {
   const [active, setActive] = useState({
     left: "#0E0E0E",
     right: "#0E0E0E",
   });
+
+  const [hovered, setHovered] = useState(false); // State for handling hover
 
   const swiperRef = useRef(null);
 
@@ -57,36 +59,13 @@ const Features = ({ heading = "Featured vehicles", slides=3.5 }) => {
     },
   ]; // Placeholder for card data
 
-  const [marginLeft, setMarginLeft] = useState(0); // Set initial margin to 0
-
-  // Update margin values based on screen size
-  const handleDragEnd = (event, info) => {
-    const dragOffset = info.offset.x; // Get the total distance dragged (in pixels)
-    const cardWidth = window.innerWidth < 768 ? 325 : 420; // Set card width based on screen size
-
-    if (dragOffset < -100 && marginLeft > -(cards.length - 1) * cardWidth) {
-      setMarginLeft(marginLeft - cardWidth); // Move left by cardWidth
-    } else if (dragOffset > 100 && marginLeft < 0) {
-      setMarginLeft(marginLeft + cardWidth); // Move right by cardWidth
-    }
-  };
-
   const onClickRight = () => {
-    // const cardWidth = window.innerWidth < 768 ? 325 : 420; // Set card width based on screen size
-    // if (marginLeft > -(cards.length - 1) * cardWidth) {
-    //   setMarginLeft(marginLeft - cardWidth);
-    // }
     if (swiperRef.current) {
       swiperRef.current.slideNext();
     }
   };
 
-  // On click for left arrow
   const onClickLeft = () => {
-    // const cardWidth = window.innerWidth < 768 ? 325 : 420; // Set card width based on screen size
-    // if (marginLeft < 0) {
-    //   setMarginLeft(marginLeft + cardWidth);
-    // }
     if (swiperRef.current) {
       swiperRef.current.slidePrev();
     }
@@ -150,9 +129,9 @@ const Features = ({ heading = "Featured vehicles", slides=3.5 }) => {
               </div>
             </div>
           </div>
+
           {/* Cards Section */}
           <div className="flex lg:gap-5 gap-[6px] lg:w-full md:w-full w-auto max-w-full overflow-hidden mx-auto ">
-            {/* Apply drag to all cards */}
             <Swiper
               spaceBetween={20}
               slidesPerView={3}
@@ -192,16 +171,30 @@ const Features = ({ heading = "Featured vehicles", slides=3.5 }) => {
           {/* View All Button */}
           <div className="flex justify-center items-center">
             <Link to="/view">
-              <button className="lg:w-[340px] md:w-[340px] w-[325px] h-[44px] rounded-[10px] flex justify-center items-center text-[14px] mt-[10px] hoverAni6 font-[500] relative">
+              <button
+                className="lg:w-[340px] md:w-[340px] w-[325px] h-[44px] rounded-[10px] flex justify-center items-center text-[14px] mt-[10px] hoverAni6 font-[500] relative"
+                onMouseEnter={() => setHovered(true)} // Set hover state to true
+                onMouseLeave={() => setHovered(false)} // Set hover state to false
+              >
                 View All Vehicles{" "}
                 <div className="relative">
                   <div className="hoverLine2"></div>
                 </div>
-                <img
-                  src={require("../../../images/cardicon.png")}
-                  className="w-[20px] h-[20px] imahe1"
-                  alt=""
-                />
+                <svg
+                  className="hoverSVG w-[10px] h-[10px] ml-2 imahe1"
+                  width="9"
+                  height="13"
+                  viewBox="0 0 9 13"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 1L7 6.5L1 12"
+                    className="svgPath"
+                    stroke={`${!hovered? "#000000": "#FFB600"}`}
+                    strokeWidth="1.5"
+                  />
+                </svg>
               </button>
             </Link>
           </div>

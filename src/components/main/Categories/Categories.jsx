@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from './Card'
 import { Link } from 'react-router-dom'
 
 const Categories = () => {
+    const [hovered, setHovered] = useState(false);
     const cat = [{
         heading: "Sports",
         image: require('../../../images/catsport.png')
@@ -55,9 +56,26 @@ const Categories = () => {
                         ))}
                     </div>
                     <Link to={'/view'}>
-                        <div className="flex justify-center items-center lg:my-0 md:my-0 my-10 lg:mb-0 md:mb-0 mb-[100px] ">
+                        <div className="flex justify-center items-center lg:my-0 md:my-0 my-10 lg:mb-0 md:mb-0 mb-[100px] "
+                            onMouseEnter={() => setHovered(true)} // Set hover state to true
+                            onMouseLeave={() => setHovered(false)}
+                        >
                             <button className='w-[340px] h-[44px] rounded-[10px] flex justify-center  items-center text-[14px] mt-[10px] hoverAni3 font-[500] relative'>
-                                View All <div className='relative'> <div className='hoverLine2'></div></div> <img src={require("../../../images/cardicon.png")} className='w-[20px] h-[20px] imahe1' alt="" />
+                                View All <div className='relative'> <div className='hoverLine2'></div></div> <svg
+                                    className="hoverSVG w-[10px] h-[10px] ml-2 imahe1"
+                                    width="9"
+                                    height="13"
+                                    viewBox="0 0 9 13"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M1 1L7 6.5L1 12"
+                                        className="svgPath"
+                                        stroke={`${!hovered ? "#000000" : "#FFB600"}`}
+                                        strokeWidth="1.5"
+                                    />
+                                </svg>
                             </button>
                         </div>
                     </Link>

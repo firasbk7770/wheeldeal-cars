@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Card = ({ obj }) => {
     const { id, image, discount, seat, heading, name, lease, mile, price, transType } = obj;
+    const [hovered, setHovered] = useState(false);
     return (
         <motion.div
             layout
@@ -79,10 +80,30 @@ const Card = ({ obj }) => {
             </Link>
             <Link to={`/view/${id}`}>
                 <div className="">
-                    <button className='lg:w-[100%] md:w-[340px] w-[277px] h-[44px] rounded-[10px] flex justify-center items-center text-[14px] mt-[10px] hoverAni56 font-[500] relative'>
+                    <button className='lg:w-[100%] md:w-[340px] w-[277px] h-[44px] rounded-[10px] flex justify-center items-center text-[14px] mt-[10px] hoverAni56 font-[500] relative'
+                        onMouseEnter={() => setHovered(true)} // Set hover state to true
+                        onMouseLeave={() => setHovered(false)}
+                    >
                         View Details
+                        <div className="line">
+                            
+                        </div>
                         <span className='w-[20px]'>
-                            <img src={require("../../images/cardicon.png")} className='w-[20px] h-[20px] imahe32' alt="" />
+                            <svg
+                                className="hoverSVG w-[10px] h-[10px] ml-2 imahe1"
+                                width="9"
+                                height="13"
+                                viewBox="0 0 9 13"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M1 1L7 6.5L1 12"
+                                    className="svgPath"
+                                    stroke={`${!hovered ? "#000000" : "#FFB600"}`}
+                                    strokeWidth="1.5"
+                                />
+                            </svg>
                         </span>
                     </button>
                 </div>

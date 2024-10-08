@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 const Card = ({ obj }) => {
+    const [hovered, setHovered] = useState(false);
     const { image, discount, seats = 4, heading, name, lease, mile, price } = obj;
     return (
         <div className='mainCard lg:w-[400px] md:w-[400px] w-[320px] lg:h-[580px] md:h-[580px] h-[510px] p-[18px] rounded-[15px] border border-[#E9E9E9] my-10 bg-white cursor-pointer md:mr-[20px] mr-[0px]' >
@@ -77,8 +78,25 @@ const Card = ({ obj }) => {
             <Link to={'/detail/1'}>
 
                 <div className="">
-                    <button className='lg:w-[340px] md:w-[340px] w-[277px] h-[44px] rounded-[10px] flex justify-center items-center text-[14px] mt-[10px] hoverAni font-[500] relative'>
-                        View Details <div className='relative'> <div className='hoverLine4'></div></div> <img src={require("../../images/cardicon.png")} className='w-[20px] h-[20px] imahe' alt="" />
+                    <button className='lg:w-[340px] md:w-[340px] w-[277px] h-[44px] rounded-[10px] flex justify-center items-center text-[14px] mt-[10px] hoverAni font-[500] relative'
+                        onMouseEnter={() => setHovered(true)} // Set hover state to true
+                        onMouseLeave={() => setHovered(false)}
+                    >
+                        View Details <div className='relative'> <div className='hoverLine4'></div></div> <svg
+                            className="hoverSVG w-[10px] h-[10px] ml-2 imahe1"
+                            width="9"
+                            height="13"
+                            viewBox="0 0 9 13"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M1 1L7 6.5L1 12"
+                                className="svgPath"
+                                stroke={`${!hovered ? "#000000" : "#FFB600"}`}
+                                strokeWidth="1.5"
+                            />
+                        </svg>
                     </button>
                 </div>
             </Link>
