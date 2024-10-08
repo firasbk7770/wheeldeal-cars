@@ -178,10 +178,10 @@ body {
   transition: 0.5s all;
 }
 
-.mainCard:hover .mainButton {
+/* .mainCard:hover .mainButton {
   background-color: #F6B000;
 
-}
+} */
 
 .submitButton img {
   transition: 0.3 all;

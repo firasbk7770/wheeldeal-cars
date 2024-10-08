@@ -47,7 +47,7 @@ const Card = ({ obj }) => {
                 }} >
                     {name}
                 </div>
-                <div className="moreDesc w-[100%] flex gap-[18px]" style={{ letterSpacing: "-0.5px" }}>
+                <div className="moreDesc w-[100%] flex lg:gap-[18px] gap-[10px]" style={{ letterSpacing: "-0.5px" }}>
                     <div className="w-[136px]">
                         <div className="head text-[#959595] font-[500] text-[12px] flex justify-start">
                             Lease&nbsp;term:&nbsp;<span className='text-black ml-1 '>{lease}</span>
@@ -72,7 +72,7 @@ const Card = ({ obj }) => {
 
             <Link to={'/detail/1'}>
                 <div className="px-[10px]">
-                    <button className='mainButton lg:w-[100%] md:w-[340px] w-[277px] h-[44px] rounded-[10px] bg-black text-white flex justify-center items-center text-[14px] mt-[15px] font-[500] transition-all duration-300'>
+                    <button className='mainButton hover:bg-[#F6B000] lg:w-[100%] md:w-[340px] w-[277px] h-[44px] rounded-[10px] bg-black text-white flex justify-center items-center text-[14px] mt-[15px] font-[500] transition-all duration-300'>
                         Request a quote
                     </button>
                 </div>

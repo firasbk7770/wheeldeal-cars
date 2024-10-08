@@ -65,7 +65,7 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
             });
 
             const data = await response.json();
-
+            console.log(data.secure_url);
             if (data.secure_url) {
 
                 setImages([...images, data.secure_url]);
@@ -90,7 +90,7 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
         //         base64Images.push(base64); // Already formatted correctly
         //     }
         // }
-
+        e.target.value = ''; 
         // setImages([...images, ...base64Images]);
     };
 

@@ -68,7 +68,7 @@ const Card = ({ obj }) => {
             </div>
             <Link to={'/detail/1'}>
                 <div className="">
-                    <button className='mainButton lg:w-[340px] md:w-[340px] w-[277px] h-[44px] rounded-[10px] bg-black text-white flex justify-center items-center text-[14px] mt-[15px] font-[500]  transition-all duration-300'>
+                    <button className='mainButton lg:w-[340px] md:w-[340px] w-[277px] h-[44px] rounded-[10px] bg-black text-white flex justify-center items-center text-[14px] mt-[15px] font-[500] hover:bg-[#F6B000] transition-all duration-300'>
                         Request a quote
                     </button>
                 </div>

@@ -170,7 +170,7 @@ const CarDetailsHero = (props) => {
                     <img
                       src={image}
                       alt={`Car ${index + 1}`}
-                      className="w-[243px] h-[93px]"
+                      className="w-[243px] h-[100px]"
                     />
                   </div>
                 </SwiperSlide>
