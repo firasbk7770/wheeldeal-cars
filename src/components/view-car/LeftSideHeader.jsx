@@ -5,11 +5,11 @@ import { motion } from "framer-motion"
 import { context } from '../../context/context';
 
 const LeftSideHeader = ({ searchResults, isFilter, setIsFilter, setPriceRange, priceRange, total }) => {
-    const max = 1000;
+    const max = 10000;
     const min = 0;
     const [isOverlayVisible, setIsOverlayVisible] = useState(false); // State for overlay visibility
     const [isOverlayVisibleSort, setIsOverlayVisibleSort] = useState(false);
-    // const [priceRange, setPriceRange] = useState({ min: 0, max: 5000 });
+    // const [priceRange, setPriceRange] = useState({ min: 0, max: 10000 });
     const toggleOverlay = () => {
         setIsOverlayVisible(!isOverlayVisible); // Toggle overlay visibility
     };
@@ -50,7 +50,7 @@ const LeftSideHeader = ({ searchResults, isFilter, setIsFilter, setPriceRange, p
             Year: [],
             Price: []
         });
-        setPriceRange({ min: 0, max: 5000 });
+        setPriceRange({ min: 0, max: 10000 });
         setActiveFilters([]);
         toggleOverlay();
         setIsFilter(!isFilter);
@@ -64,7 +64,7 @@ const LeftSideHeader = ({ searchResults, isFilter, setIsFilter, setPriceRange, p
             Year: [],
             Price: []
         });
-        setPriceRange({ min: 0, max: 5000 });
+        setPriceRange({ min: 0, max: 10000 });
         setActiveFilters([]);
         setIsFilter(!isFilter);
     }
@@ -86,7 +86,7 @@ const LeftSideHeader = ({ searchResults, isFilter, setIsFilter, setPriceRange, p
             .flat()
             .filter(filter => !filter.includes("$")); // Remove any existing price filters
 
-        if ((priceRange.max !== 5000 || priceRange.min > 0) && (priceRange.min !== 0 || priceRange.max > 0)) {
+        if ((priceRange.max !== 10000 || priceRange.min > 0) && (priceRange.min !== 0 || priceRange.max > 0)) {
             const priceFilter = formatPriceRange(priceRange.min, priceRange.max);
             updatedFilters.push(priceFilter); // Add the formatted price range as a filter
         }
@@ -123,7 +123,7 @@ const LeftSideHeader = ({ searchResults, isFilter, setIsFilter, setPriceRange, p
         const filters = Object.values(selectedValues).flat();
 
         // Always include price filter by default
-        if ((priceRange.max !== 5000 || priceRange.min > 0)&& (priceRange.min !== 0 || priceRange.max > 0)) {
+        if ((priceRange.max !== 10000 || priceRange.min > 0)&& (priceRange.min !== 0 || priceRange.max > 0)) {
             filters.push(formatPriceRange(priceRange.min, priceRange.max));
         }
 

@@ -145,7 +145,10 @@ body {
 
 }
 
-
+.hoverArrow:hover .imageInArrow{
+  width: 100%;
+  opacity: 1;
+}
 
 .catCard:hover .imageInCatCard {
   width: 100%;

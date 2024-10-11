@@ -51,9 +51,10 @@ const Pagination = ({ totalPages, currentPage = 1, setPage }) => {
 
       if (currentPage < totalPages - 2) visiblePages.push('...'); // Add ellipsis after current page if necessary
 
-      visiblePages.push(totalPages); // Always show the last page
+      if(totalPages && totalPages !== undefined) {
+        visiblePages.push(totalPages); // Always show the last page
+      }
     }
-
     return visiblePages.map((page, index) => {
       if (page === '...') {
         return <span key={`ellipsis-${index}`} className="mx-2">...</span>;

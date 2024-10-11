@@ -32,6 +32,9 @@ const Card = ({ image, heading, desc, reverse }) => {
                                 strokeWidth="1.5"
                             />
                         </svg>
+                        {/* <span className=' opacity-0 transition-all duration-500 imageInArrow w-0'>
+                            <img src={require("../../../images/fullarrow.png")} className='w-[48px] h-[22px]' alt="" />
+                        </span> */}
                     </button>
                 </div>
             </div>

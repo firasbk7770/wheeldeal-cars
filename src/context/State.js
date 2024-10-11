@@ -18,7 +18,7 @@ const StatesStore = ({ children }) => {
     const [activeSort, setActiveSort] = useState({ name: "Oldest to Newest", value: "OTN" });
 
 
-    const [priceRange, setPriceRange] = useState({ min: 0, max: 5000 });
+    const [priceRange, setPriceRange] = useState({ min: 0, max: 10000 });
     const [viewPage, setViewPage] = useState(1);
 
     useEffect(() => {

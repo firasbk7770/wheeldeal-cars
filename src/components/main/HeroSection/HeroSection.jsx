@@ -9,18 +9,18 @@ import './RangeSlider.css'
 // import { img } from 'framer-motion/client';
 // import Jeep from './icons/Jeep';
 // import Merce from './icons/Merce';
-import CircleIcon from './icons/Circle';
-import AIcon from './icons/AIcon';
-import Benz from './icons/Benz';
-import Tesla from './icons/Tesla';
+// import CircleIcon from './icons/Circle';
+// import AIcon from './icons/AIcon';
+// import Benz from './icons/Benz';
+// import Tesla from './icons/Tesla';
 
-import Oval from './icons/Oval'
-import OvalO from './icons/OvalO';
+// import Oval from './icons/Oval'
+// import OvalO from './icons/OvalO';
 // import Hunda from './icons/Hunda';
 // import VerticalBox from './icons/VerticalBox';
 // import Animal from './icons/Animal';
-import KN from './icons/KN';
-import Bugati from './icons/Bugati';
+// import KN from './icons/KN';
+// import Bugati from './icons/Bugati';
 // import OvalArrow from './icons/OvalArrow';
 // import OvalTriangle from './icons/OvalTriangle';
 // import DoubleTriangle from './icons/DoubleTriangle';
@@ -29,11 +29,38 @@ import Bugati from './icons/Bugati';
 // import DoubleLine from './icons/DoubleLine'
 // import DotTriangle from './icons/DotTriangle'
 // import Hunda2 from './icons/Hunda2'
-import All from './icons/All';
+// import All from './icons/All';
 // import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'; // Import new icons
 import { context } from '../../../context/context';
 import { div } from 'framer-motion/client';
 
+const vehicleModels = {
+    "Ford": ["F-150", "Mustang", "Explorer", "Escape", "Bronco", "Expedition", "Edge", "Ranger", "Maverick", "Super Duty"],
+    "Chevrolet": ["Silverado", "Corvette", "Camaro", "Tahoe", "Suburban", "Malibu", "Blazer", "Equinox", "Traverse", "Colorado", "Trailblazer"],
+    "Toyota": ["Camry", "Corolla", "RAV4", "Tacoma", "Tundra", "Highlander", "4Runner", "Prius", "Sienna", "Land Cruiser"],
+    "Honda": ["Accord", "Civic", "CR-V", "Pilot", "Odyssey", "Passport", "HR-V", "Ridgeline", "Insight"],
+    "Jeep": ["Wrangler", "Grand Cherokee", "Cherokee", "Gladiator", "Renegade", "Compass", "Wagoneer"],
+    "Tesla": ["Model 3", "Model S", "Model X", "Model Y", "Cybertruck (Upcoming)", "Roadster (Upcoming)"],
+    "Ram": ["1500", "2500", "3500", "ProMaster", "TRX", "ProMaster City"],
+    "Nissan": ["Altima", "Sentra", "Rogue", "Murano", "Pathfinder", "Frontier", "Titan", "Maxima", "Armada", "Kicks", "Leaf"],
+    "BMW": ["3 Series", "5 Series", "7 Series", "X1", "X3", "X5", "X7", "4 Series", "M3", "M4", "M4", "Z4", "i3 (Discontinued)", "i4", "iX", "M8"],
+    "Mercedes-Benz": ["A-Class", "C-Class", "E-Class", "S-Class", "G-Class", "GLA", "GLB", "GLC", "GLE", "GLS", "AMG GT", "EQS (Electric)", "EQE (Electric)"],
+    "Subaru": ["Outback", "Forester", "Ascent", "Impreza", "WRX", "Crosstrek", "Legacy", "BRZ"],
+    "GMC": ["Sierra 1500", "Sierra 2500HD", "Yukon", "Acadia", "Terrain", "Canyon", "Hummer EV"],
+    "Dodge": ["Challenger", "Charger", "Durango", "Journey (Discontinued)", "Hornet", "Viper (Discontinued)", "Grand Caravan (Discontinued)"],
+    "Volkswagen": ["Jetta", "Passat", "Golf", "Tiguan", "Atlas", "ID.4 (Electric)", "Arteon", "Taos"],
+    "Hyundai": ["Elantra", "Sonata", "Tucson", "Santa Fe", "Palisade", "Kona", "Venue", "Ioniq 5 (Electric)", "Veloster N"],
+    "Ferrari": ["488", "F8 Tributo", "SF90 Stradale", "812 Superfast", "Roma", "Portofino", "LaFerrari", "Purosangue (SUV)"],
+    "Lamborghini": ["Aventador", "Huracán", "Urus", "Sián", "Revuelto (Upcoming)"],
+    "Porsche": ["911", "Cayenne", "Macan", "Panamera", "Taycan (Electric)", "718 Boxster", "718 Cayman"],
+    "Aston Martin": ["Vantage", "DB11", "DBX", "DBS Superleggera", "Valhalla (Upcoming)", "Valkyrie"],
+    "McLaren": ["720S", "570S", "GT", "600LT", "Artura (Hybrid)", "Senna", "Speedtail"],
+    "Rolls-Royce": ["Phantom", "Ghost", "Wraith", "Dawn", "Cullinan", "Spectre (Upcoming Electric)"],
+    "Bentley": ["Bentayga", "Continental GT", "Flying Spur", "Mulsanne (Discontinued)"],
+    "Maserati": ["Ghibli", "Quattroporte", "Levante", "MC20", "GranTurismo (Upcoming)"],
+    "Bugatti": ["Chiron", "Veyron (Discontinued)", "Divo", "Centodieci", "Bolide"],
+    "Lotus": ["Evora", "Elise", "Exige", "Emira",],
+};
 
 export const RangeSlider = ({ min, max, value, step, onChange }) => {
     const [minValue, setMinValue] = useState(value ? value.min : min);
@@ -95,7 +122,7 @@ export const RangeSlider = ({ min, max, value, step, onChange }) => {
     return (
         <div className="slider-container relative  h-[170px]  text-white  bg-[#2C2C2C]">
             <div className="mt-[14.35px] text-[14px] font-[500] text-white flex items-center justify-between">Price range
-                <div className="">
+                <div className="hidden">
                     <img src={require("../../../images/Frame (8).png")} alt="" />
             </div></div>
 
@@ -169,6 +196,7 @@ export const CustomDropdown = ({ options, defaultText, selectedValues, onSelect,
         } else {
             onSelect(value, true); // Select
         }
+        setIsOpen(!isOpen);
     };
 
     return (
@@ -184,7 +212,6 @@ export const CustomDropdown = ({ options, defaultText, selectedValues, onSelect,
                 <img src={require("../../../images/coloricondown.png")} className='w-[20px] h-[20px] text-img2 hidden rotate-180' alt="" />
             </div>
 
-            {/* Animate dropdown appearance */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.ul
@@ -218,7 +245,7 @@ export const CustomDropdown = ({ options, defaultText, selectedValues, onSelect,
                                 <li className="bg-[#2C2C2C] w-[401px]">
                                     <RangeSlider
                                         min={0}
-                                        max={5000}
+                                        max={10000}
                                         value={priceRange}
                                         step={1}
                                         onChange={handlePriceChange}
@@ -251,131 +278,106 @@ export const CustomDropdown = ({ options, defaultText, selectedValues, onSelect,
     );
 };
 
-export const selections = [
-    // {
-    //     name: "Categories",
-    //     options: [
-    //         { value: 'Sport', label: 'Sport' },
-    //         { value: 'SUVs', label: 'SUVs' },
-    //         { value: 'Hatchback', label: 'Hatchback' },
-    //         { value: 'Crossover', label: 'Crossover' },
-    //         { value: 'Sedan', label: 'Sedan' },
-    //         { value: 'Electric', label: 'Electric' },
-    //         { value: 'Hybrid', label: 'Hybrid' },
-    //         { value: 'Pickup', label: 'Pickup' },
-    //     ],
-    //     default: "All categories",
-    //     width: '500px',
-    //     left: "0px"
-    // },
-    {
-        name: "Make",
-        options: [
-            { id: 1, value: 'Ford' },
-            { id: 2, value: 'Chevrolet' },
-            { id: 3, value: 'Toyota' },
-            { id: 4, value: 'Honda' },
-            { id: 5, value: 'Jeep' },
-            { id: 6, value: 'Tesla' },
-            { id: 7, value: 'Ram' },
-            { id: 8, value: 'Nissan' },
-            { id: 9, value: 'BMW' },
-            { id: 10, value: 'Mercedes-Benz' },
-            { id: 11, value: 'Subaru' },
-            { id: 12, value: 'GMC' },
-            { id: 13, value: 'Dodge' },
-            { id: 14, value: 'Volkswagen' },
-            { id: 15, value: 'Hyundai' },
-            { id: 16, value: 'Ferrari' },
-            { id: 17, value: 'Lamborghini' },
-            { id: 18, value: 'Porsche' },
-            { id: 19, value: 'Aston Martin' },
-            { id: 20, value: 'McLaren' },
-            { id: 21, value: 'Rolls-Royce' },
-            { id: 22, value: 'Bentley' },
-            { id: 23, value: 'Maserati' },
-            { id: 24, value: 'Bugatti' },
-            { id: 25, value: 'Lotus' },
-        ],
-        default: "All makes",
-        width: '362px',
-        left: "34px"
-    },
-    {
-        name: "Model",
-        options: [
-            { value: 'All', label: 'All' },
-            { value: 'Model Y', label: 'Model Y' },
-            { value: 'Model S', label: 'Model S' },
-            { value: 'Cybertruck', label: 'Cybertruck' }
-            // { value: 'Sorento', label: 'Sorento' },
-            // { value: 'Seltos', label: 'Seltos' },
-            // { value: 'Telluride', label: 'Telluride' },
-            // { value: 'Soul', label: 'Soul' },
-            // { value: 'Niro', label: 'Niro' },
-            // { value: 'EV6', label: 'EV6' },
-            // { value: 'Stinger', label: 'Stinger' },
-            // { value: 'Forte', label: 'Forte' },
-            // { value: 'K5', label: 'K5' },
-            // { value: 'Rio', label: 'Rio' },
-            // { value: 'Optima', label: 'Optima' },
-            // { value: 'Cadenza', label: 'Cadenza' },
-            // { value: 'Picanto', label: 'Picanto' },
-            // { value: 'XCeed', label: 'XCeed' },
-            // { value: 'ProCeed', label: 'ProCeed' },
-        ],
-        default: "All models",
-        width: '190px',
-        left: "176px"
-    },
-    {
-        name: "BodyType",
-        options: [
-            { value: 'All', label: 'All' },
-            { value: 'Sedan', label: 'Sedan' },
-            { value: 'Cargo Van', label: 'Cargo Van' },
-            { value: 'Convertible', label: 'Convertible' },
-            { value: 'Hatchback', label: 'Hatchback' },
-            { value: 'Mnivan', label: 'Mnivan' },
-            { value: 'Passenger Van', label: 'Passenger Van' },
-            { value: 'SUV', label: 'SUV' },
-            { value: 'Truck', label: 'Truck' },
-            { value: 'Wagon', label: 'Wagon' },
-        ],
-        default: "All types",
-        width: '190px',
-        left: "404px"
-    },
-    {
-        name: "Price",
-        options: [
-            { value: '0-20000', label: '$0 - $20,000' },
-            { value: '20000-40000', label: '$20,000 - $40,000' },
-            { value: '40000+', label: '$40,000+' },
-        ],
-        default: "Any price",
-        width: '441px',
-        left: "554px"
-    }
-];
-
 
 const HeroSection = () => {
     const navigate = useNavigate();
     const [isOverlayVisible, setIsOverlayVisible] = useState(false); // State for overlay visibility
+    const [selectedBrand, setSelectedBrand] = useState(null);
+    const [selectedModel, setSelectedModel] = useState(null);
+    const [selectedType, setSelectedType] = useState(null);
 
     const toggleOverlay = () => {
         setIsOverlayVisible(!isOverlayVisible); // Toggle overlay visibility
     };
 
+    const [selections, setSelections] = useState([
+        // {
+        //     name: "Categories",
+        //     options: [
+        //         { value: 'Sport', label: 'Sport' },
+        //         { value: 'SUVs', label: 'SUVs' },
+        //         { value: 'Hatchback', label: 'Hatchback' },
+        //         { value: 'Crossover', label: 'Crossover' },
+        //         { value: 'Sedan', label: 'Sedan' },
+        //         { value: 'Electric', label: 'Electric' },
+        //         { value: 'Hybrid', label: 'Hybrid' },
+        //         { value: 'Pickup', label: 'Pickup' },
+        //     ],
+        //     default: "All categories",
+        //     width: '500px',
+        //     left: "0px"
+        // },
+        {
+            name: "Make",
+            options: [
+                { id: 1, value: 'Ford' },
+                { id: 2, value: 'Chevrolet' },
+                { id: 3, value: 'Toyota' },
+                { id: 4, value: 'Honda' },
+                { id: 5, value: 'Jeep' },
+                { id: 6, value: 'Tesla' },
+                { id: 7, value: 'Ram' },
+                { id: 8, value: 'Nissan' },
+                { id: 9, value: 'BMW' },
+                { id: 10, value: 'Mercedes-Benz' },
+                { id: 11, value: 'Subaru' },
+                { id: 12, value: 'GMC' },
+                { id: 13, value: 'Dodge' },
+                { id: 14, value: 'Volkswagen' },
+                { id: 15, value: 'Hyundai' },
+                { id: 16, value: 'Ferrari' },
+                { id: 17, value: 'Lamborghini' },
+                { id: 18, value: 'Porsche' },
+                { id: 19, value: 'Aston Martin' },
+                { id: 20, value: 'McLaren' },
+                { id: 21, value: 'Rolls-Royce' },
+                { id: 22, value: 'Bentley' },
+                { id: 23, value: 'Maserati' },
+                { id: 24, value: 'Bugatti' },
+                { id: 25, value: 'Lotus' },
+            ],
+            default: "All makes",
+            width: '362px',
+            left: "34px"
+        },
+        {
+            name: "Model",
+            options: [
+                { value: 'All', label: 'All' },
+            ],
+            default: "All models",
+            width: '190px',
+            left: "176px"
+        },
+        {
+            name: "BodyType",
+            options: [
+                { value: 'All', label: 'All' },
+                { value: 'Coupe', label: 'Coupe' },
+                { value: 'Sedan', label: 'Sedan' },
+                { value: 'SUV', label: 'SUV' },
+                { value: 'Crossover', label: 'Crossover' },
+                { value: 'Convertible', label: 'Convertible' },
+                { value: 'Van', label: 'Van' }
+            ],
+            default: "All types",
+            width: '190px',
+            left: "404px"
+        },
+        {
+            name: "Price",
+            options: [
+                { value: '0-20000', label: '$0 - $20,000' },
+                { value: '20000-40000', label: '$20,000 - $40,000' },
+                { value: '40000+', label: '$40,000+' },
+            ],
+            default: "Any price",
+            width: '441px',
+            left: "554px"
+        }
+    ]);
+
     // const [openDropdown, setOpenDropdown] = useState(null);
-    // const [selectedValues, setSelectedValues] = useState({
-    //     Make: ['All'],  // "All" is selected by default for "Make"
-    //     Categories: [],
-    //     Model: [],
-    //     Year: [],
-    //     Price: []
-    // });
 
     const { selectedValues, setSelectedValues, priceRange, setPriceRange, isFilter, setIsFilter } = useContext(context)
 
@@ -390,17 +392,108 @@ const HeroSection = () => {
         setSelectedValues(prev => {
             const currentSelections = prev[name] || [];
             if (isSelected) {
-                return { ...prev, [name]: [...currentSelections, value] };
+                return { ...prev, [name]: [value] };
             } else {
                 return { ...prev, [name]: currentSelections.filter(v => v !== value) };
             }
         });
+
+        if(name === 'Make') {
+            setSelectedBrand(value);
+        } else if(name === 'Model') {
+            console.log(value);
+            setSelectedModel(value);
+        } else if(name === 'BodyType') {
+            setSelectedType(value);
+        }
     };
 
     const handleFilterBtn = () => {
         setIsFilter(!isFilter);
         navigate("/view");
     }
+
+    const formatPriceRange = (min, max) => {
+        return `$${parseInt(min)} - $${parseInt(max)}`;
+    };
+
+    useEffect(() => {
+        if (selectedBrand) {
+            let tempModels = [];
+            vehicleModels && vehicleModels[selectedBrand].map(item => {
+                tempModels.push({value: item, label: item});
+            });
+            
+            setSelections(prevSelections => {
+                return prevSelections.map(selection => {
+                    if (selection.name === "Model") {
+                        return {
+                            ...selection,
+                            options: tempModels,
+                        };
+                    }
+
+                    if(selection.name === "Make") {
+                        return {
+                            ...selection,
+                            default: selectedBrand
+                        };
+                    }
+
+                    return selection;
+                });
+            });
+        }
+
+        if (selectedModel) {
+            setSelections(prevSelections => {
+                return prevSelections.map(selection => {
+                    if(selection.name === "Model") {
+                        return {
+                            ...selection,
+                            default: selectedModel
+                        };
+                    }
+                    
+                    return selection;
+                });
+            });
+        }
+
+        
+        if (selectedType) {
+            setSelections(prevSelections => {
+                return prevSelections.map(selection => {
+                    if(selection.name === "BodyType") {
+                        return {
+                            ...selection,
+                            default: selectedType
+                        };
+                    }
+                    
+                    return selection;
+                });
+            });
+        }
+
+        if(priceRange) {
+            if ((priceRange.max !== 10000 || priceRange.min > 0)&& (priceRange.min !== 0 || priceRange.max > 0)) {
+                setSelections(prevSelections => {
+                    return prevSelections.map(selection => {
+                        if(selection.name === "Price") {
+                            return {
+                                ...selection,
+                                default: formatPriceRange(priceRange.min, priceRange.max)
+                            };
+                        }
+                        
+                        return selection;
+                    });
+                });
+            }
+        }
+
+    }, [selectedBrand, selectedModel, selectedType, priceRange]);
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -546,10 +639,7 @@ export const FAQ = ({ selectedValues, priceRange, handlePriceChange, selections,
     return (
         <div className="lg:-mt-10 md:-mt-10 mt-[10%]">
             <div className="lg:w-[600px] md:w-[600px] w-[325px] mx-auto">
-
-
-
-                {selectionsWithDate.map((selection, index) => (
+                {selectionsWithDate && selectionsWithDate.map((selection, index) => (
                     <div key={selection.name} className="w-full ">
                         <div className="w-full my-5" />
                         <div
@@ -583,26 +673,11 @@ export const FAQ = ({ selectedValues, priceRange, handlePriceChange, selections,
                                 transition={{ duration: 0.3 }} // Control the speed of the animation
                                 className={`flex justify-start items-center bg-white text-black flex-wrap font-[500] gap-[5px]`}
                             >
-                                {selection.name === "Make"
-                                    ? selection.options.map((option) => (
-                                        <li
-                                            key={option.value}
-                                            className="rounded-full w-[80px]"
-                                            onClick={() => toggleOption(selection.name, option.value, option.label)}
-                                            onMouseEnter={() => setHoveredValue(option.value)}
-                                            onMouseLeave={() => setHoveredValue(null)}
-                                        >
-                                            {React.cloneElement(option.label, {
-                                                bg: selectedValues[selection.name] && selectedValues[selection.name].includes(option.value) ? "black" : (hoveredValue === option.value ? "#F0F0F0" : "white"),
-                                                color: selectedValues[selection.name] && selectedValues[selection.name].includes(option.value) ? "white" : (hoveredValue === option.value ? "#B9B9B9" : "#B9B9B9")
-                                            })}
-                                        </li>
-                                    ))
-                                    : selection.name === "Price" ? (
-                                        <li className="w-[100%] -ml-[4%]">
+                                {selection.name === "Price" ? (
+                                        <li className="w-[100%] -ml-[4%] price-range-slider">
                                             <RangeSlider
                                                 min={0}
-                                                max={5000}
+                                                max={10000}
                                                 value={priceRange}
                                                 step={1}
                                                 onChange={handlePriceChange}
@@ -639,12 +714,6 @@ export const FAQ = ({ selectedValues, priceRange, handlePriceChange, selections,
                                         </div>
                                     ) : (
                                         <>
-                                            {/* {selection.name !== "Categories" && <li
-                                                className={`${styles.option} ${selectedValues[selection.name] && selectedValues[selection.name].length === 0 ? styles.selected : ''}`}
-                                                onClick={() => toggleOption(selection.name, "All", "All")}
-                                            >
-                                                All
-                                            </li>} */}
                                             {
                                                 selection.options.map((option) => (
                                                     <li

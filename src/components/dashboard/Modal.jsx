@@ -278,7 +278,7 @@ const Modal = ({ closeModal, heading = "Add new vehicle", carId = null, name }) 
                             </div>
 
                             <div className="">
-                                <Dropdown options={['Coupe', 'Sedan', 'SUV ', 'Crossover', 'Convertible', 'Van']} optionCase={carId ? "edit" : "add"} label={vehicleType || 'Choose Vehicle Type'} onSelect={setVehicleType} />
+                                <Dropdown options={['Coupe', 'Sedan', 'SUV', 'Crossover', 'Convertible', 'Van']} optionCase={carId ? "edit" : "add"} label={vehicleType || 'Choose Vehicle Type'} onSelect={setVehicleType} />
                             </div>
                         </div>
 

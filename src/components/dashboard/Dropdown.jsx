@@ -48,7 +48,7 @@ const Dropdown = ({ options, label, onSelect, optionCase, type }) => {
 
             {isOpen && (
                 <div className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-[20px] shadow-lg overflow-hidden overflow-y-auto" style={{ height: heightStyle }} ref={divRef}>
-                    {options.map((option, index) => (
+                    {options && options.map((option, index) => (
                         <div
                             key={index}
                             className="px-4 py-2 mt-3 text-gray-700 cursor-pointer  hover:bg-gray-200"

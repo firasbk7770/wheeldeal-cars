@@ -160,6 +160,19 @@ color: #959595;
   display: none;
 }
 
+#filterSection li {
+  width: auto;
+}
+
+#filterSection .slider-container {
+  background-color: transparent;
+}
+
+#filterSection  .price-range-slider {
+  width: 100%;
+  margin-left: 0;
+}
+
 #filterSection {
   -ms-overflow-style: none;
   scrollbar-width: none;
