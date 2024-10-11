@@ -6,6 +6,7 @@ const StatesStore = ({ children }) => {
     const [carData, setCarData] = useState([]);
 
     const [isFilter, setIsFilter] = useState(false);
+    const [featureIndex, setFeatureIndex] = useState(1);
 
     const [selectedValues, setSelectedValues] = useState({
         Make: [],  // "All" is selected by default for "Make"
@@ -158,7 +159,7 @@ const StatesStore = ({ children }) => {
 
 
     return (
-        <Context.Provider value={{ isFilter, setIsFilter, carData, setCarData, priceRange, setPriceRange,  selectedValues, setSelectedValues, activeSort, setActiveSort, fetchData, viewPage, setViewPage, fetchDataAdmin,fetchBlogAdmin }} >
+        <Context.Provider value={{ isFilter, setIsFilter, carData, setCarData, priceRange, setPriceRange,  selectedValues, setSelectedValues, activeSort, setActiveSort, fetchData, viewPage, setViewPage, fetchDataAdmin,fetchBlogAdmin, featureIndex, setFeatureIndex }} >
             {children}
         </Context.Provider>
     )
