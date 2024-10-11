@@ -1,16 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import Card from "../../General/Card";
 import Icon from "./icon/icon";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link } from "react-router-dom";
+import { context } from "../../../context/context";
 
 const Features = ({ heading = "Featured vehicles", slides = 3.5 }) => {
   const [active, setActive] = useState({
     left: "#0E0E0E",
     right: "#0E0E0E",
   });
+
+  const {featureIndex} = useContext(context);
 
   const [hovered, setHovered] = useState(false); // State for handling hover
 
@@ -159,7 +162,7 @@ const Features = ({ heading = "Featured vehicles", slides = 3.5 }) => {
                   spaceBetween: 20,
                 },
               }}
-              style={{zIndex: -1}}
+              style={{zIndex: featureIndex}}
             >
               {cards.map((card, index) => (
                 <SwiperSlide key={index}>

@@ -150,6 +150,13 @@ export const RangeSlider = ({ min, max, value, step, onChange }) => {
 
 export const CustomDropdown = ({ options, defaultText, selectedValues, onSelect, width, name, left, priceRange, handlePriceChange }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const { setFeatureIndex } = useContext(context);
+    useEffect(() => {
+        if (isOpen)
+            setFeatureIndex(-1)
+        else
+            setFeatureIndex(1)
+    },[isOpen])
     const [hoveredValue, setHoveredValue] = useState(null);
     const dropdownRef = useRef(null);
 
